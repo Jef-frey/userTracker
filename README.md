@@ -12,9 +12,12 @@ IR transmitters and receivers will be used to detect user's hand movement, a mot
 - 3 x 1 kOhm current-limiting resistor
 - 2 x 10 kOhm resistor
 
-## Schematic
+## Design
 A pair of IR transmitter/receiver will be used to detect how close user's hand is to the device. Two pairs will be used to compare the distance of the sensors and user's hand, and device will be mounted on a motor to rotate in the direction where user's hand is closer to the device.
+![userTracker_model](https://github.com/user-attachments/assets/df251cb7-7855-448b-8148-707890eccce9)
 
+## Schematic
+![userTracker_schematic](https://github.com/user-attachments/assets/c9ea63a1-d8ee-407b-a333-a25a5b17773b)
 
 ## Microcontroller requirements
 A different microcontroller can be used, but it have to support the following features/peripherals
@@ -30,12 +33,8 @@ In IDLE state, motor will stop, LED will fade off if it was on(TMR0 will slowly 
 In CW state, motor will turn clockwise, and ADC will continuously detect IR receivers' voltage level. Once both receivers' voltage level is lower than specific level for a few cycles (to avoid misread), device will enter IDLE state.
 In CCW state, motor will turn counter-clockwise, everything else is same as CW state.
 
-
-
 ## Possible issues and improvements
 - Different sensors to detect user's motion were originally planned, as the current detection method has very limited range. The first iteration used PIR sensor, but it cannot be used on moving devices and has a ~2 sec delay time after motions stopped so it wasn't used. Upon further research time of flight sensor may be used, but it is more costly.
 - ADC voltage level at which device switches back to IDLE state may need to be changed based on where the IR sensors are located.
-
-ir transmitter PWM
-if transmitter is far enough comparator can be used 
-sleep function
+- To save power in IDLE mode, a sleep function can be implemented
+- To save power in IDLE mode, IR transmitter can be turn on for a short interval after a small delay
