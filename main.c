@@ -10,8 +10,8 @@
  * motor: total step per rotation = t = 256 * 60
  * 
  * pin layout:
- *  - receiver1 => RA0, RC0
- *  - receiver2 => RA1, RC1
+ *  - receiver1 => RA0, RA2
+ *  - receiver2 => RA1, RA5
  *  - EYE_LED   => RB6
  *  - motor     => RC3-6
  *  
@@ -23,8 +23,9 @@
 
 #pragma config WDTE = OFF       // WDT operating mode (WDT Disabled, SWDTEN is ignored)
 
-//    steps per revolution
-const int STEP_REV = 2048;
+const int STEP_REV = 2048;      // steps per revolution
+const int ADCRESH_REG = 0b01001100;    // setting the threshold sensor, currently ~600mV
+// for the ADC result register high
 
 int fade_on = 1; // indicate if LED fades on or off
 int adc_rdy = 0; // flag for ADC's Acquisition Time wait time in TMR0
@@ -63,14 +64,14 @@ void __interrupt() isr(void)
         TMR0_rst();
         
 //        ADC
-//        cycle between input pins C0 and C1 and measure
+//        cycle between input pins A2 and A5 and measure
 //        after waiting for the Acquisition Time passed 
         if (adc_rdy == 0) {
-            ADCON0bits.CHS = 0b010000;
+            ADCON0bits.CHS = 0b000010;
         } else if (adc_rdy == 1) {
             ADCON0bits.GOnDONE = 1;
         } else if (adc_rdy == 2) {
-            ADCON0bits.CHS = 0b010001;
+            ADCON0bits.CHS = 0b000101;
         } else if (adc_rdy == 3) {
             ADCON0bits.GOnDONE = 1;
         }
@@ -81,7 +82,7 @@ void __interrupt() isr(void)
         
 //        LED PWM
         if (fade_on == 1) {
-            if (PWM3DCH < 0xFF){
+            if (PWM3DCH < 0x04){
                 asm("banksel PWM3DCL");
                 asm("movlw 40h");
                 asm("addwf PWM3DCL,1"); //increment the LSB of PWM3DC
@@ -114,12 +115,12 @@ void __interrupt() isr(void)
         }
     } else if (ADIF) {
         ADIF = 0;
-    //    IDLE state if less than or equal to 40mV for 
-    //    4 consecutive measuring cycles, the cycles are
-    //    to make sure that there is no motion and not
-    //    just signal misread
+    //    IDLE state if sensor's result is lower than 
+    //    threshold for 4 consecutive measuring cycles, 
+    //    the cycles are to make sure that there is no 
+    //    motion and not just signal misread
         
-        if (ADRESH <= 0b00001010) {
+        if (ADRESH <= ADCRESH_REG) {
             if (adc_rdy == 1) {
                 rev_st_clr = 1;
             } else {
@@ -193,12 +194,12 @@ void ADC_Initialize() {
 
 void main(void) {
 //    pins initialization
-    ANSELA = 0;
+    ANSELA = 0x24;
     ANSELB = 0;
-    ANSELC = 0x03;
-    TRISA = 0x03;
+    ANSELC = 0;
+    TRISA = 0x27;
     TRISB = 0x00;
-    TRISC = 0x03;
+    TRISC = 0x00;
 
 //  peripherals initialization
     PWM_Initialize();
