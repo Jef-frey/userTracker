@@ -32,8 +32,8 @@ And '0b00101110' is my value for ADCRESH_REG
 
 
 ## Schematic
-![circuit_schematic](https://github.com/user-attachments/assets/225a1211-14ed-4425-a27e-698bf8afacdc)
-![circuit_perfboard](https://github.com/user-attachments/assets/92b2c162-c754-4ff7-a7a7-1b119258b3c6)
+![circuit_schematic](https://github.com/user-attachments/assets/2eda8d47-8ee8-4382-93fc-c63f5ab7dc25)
+![circuit_pcb](https://github.com/user-attachments/assets/acf5bcfb-dd93-4607-b3ed-ceead960875f)
 
 
 ## Microcontroller requirements
