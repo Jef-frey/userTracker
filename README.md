@@ -1,8 +1,8 @@
 # User tracker using IR sensors
-This project contains the software and design to build a device that will rotate in respond to user's hand movement, such that it follows or avoid user's hand. This is used in a hobby project of my to add on to a robot model.
+This project contains the software and design to build a device that will rotate in response to the user's hand movement, such that it follows or avoids the user's hand. This is used in a hobby project of mine to add on to a robot model.
 
 ## Components
-IR transmitters and receivers will be used to detect user's hand movement, a motor will be used such that the device follows the user's hand. A LED will be used to simulate the eye of the device. And PIC16F15344 will be used to control the signals.
+IR transmitters and receivers will be used to detect the user's hand movement, a motor will be used such that the device follows the user's hand. A LED will be used to simulate the eye of the device. And PIC16F15344 will be used to control the signals.
 
 - 1 x PIC16F15344
 - 1 x 28BYJ-48 Stepper Motor
@@ -13,8 +13,8 @@ IR transmitters and receivers will be used to detect user's hand movement, a mot
 - 2 x 10 kOhm resistor
 
 ## Design
-A pair of IR transmitter/receiver will be used to create a sensor to detect how close user's hand is to the device.
-Two such sensors will be used to compare the distance of the sensors and user's hand, and device will be mounted on a motor to rotate in the direction correpsonding to user's proxmity with the sensors. 
+A pair of IR transmitter/receiver will be used to create a sensor to detect how close the user's hand is to the device.
+Two such sensors will be used to compare the distance of the sensors and the user's hand, and the device will be mounted on a motor to rotate in the direction corresponding to the user's proximity with the sensors. 
 
 https://github.com/user-attachments/assets/98550bba-aff8-4348-be6f-40275e6825a6
 
@@ -50,6 +50,6 @@ In CW state, motor will turn clockwise, and ADC will continuously detect IR rece
 In CCW state, motor will turn counter-clockwise, all other operations are the same as CW state.
 
 ## Possible issues and improvements
-- A different sensor was originally used, as the current detection method has very limited range. The first iteration used PIR sensor, but it cannot be used on moving devices and has a ~2 sec delay time after motions stopped so it wasn't used. Upon further research time of flight sensor may be used, but it is more costly and complex.
+- A different sensor was originally used, as the current detection method has very limited range. The first iteration used PIR sensors, but it cannot be used on moving devices and has a ~2 sec delay time after motions stopped so it wasn't used. Upon further research time of flight sensor may be used, but it is more costly and complex.
 - To save power in IDLE mode, a sleep function can be implemented
 - To save power in IDLE mode, IR transmitter can be turn on for a short interval after a small delay (to have a PWM on the IR transmitter)
