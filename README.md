@@ -26,8 +26,8 @@ You may want to change the sensitivity of the device, the steps are as follow:
 3. pick the greater voltage value (in mV) from the two points, divide it by 2 and convert it to a binary number, round up the 2 least significant bits and logical right shift by 2
 4. change the ADCRESH_REG variable at line 27 at the [main.c](main.c) file to the value from step 3
 
-For example, in my device I measured 363mV 
-363mV -> 181.5 -> 0b1011_0101 -> 0b1011_1000 -> 0b0010_1110
+For example, in my device I measured 363mV  
+363mV -> 181.5 -> 0b1011_0101 -> 0b1011_1000 -> 0b0010_1110  
 And '0b00101110' is my value for ADCRESH_REG
 
 
@@ -51,6 +51,5 @@ In CCW state, motor will turn counter-clockwise, all other operations are the sa
 
 ## Possible issues and improvements
 - A different sensor was originally used, as the current detection method has very limited range. The first iteration used PIR sensor, but it cannot be used on moving devices and has a ~2 sec delay time after motions stopped so it wasn't used. Upon further research time of flight sensor may be used, but it is more costly and complex.
-- ADC voltage level at which device switches back to IDLE state (line 27) may need to be changed, this value will be dependent on the applications as the sensors will return different voltage under different environment.
 - To save power in IDLE mode, a sleep function can be implemented
 - To save power in IDLE mode, IR transmitter can be turn on for a short interval after a small delay (to have a PWM on the IR transmitter)
