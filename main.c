@@ -24,7 +24,7 @@
 #pragma config WDTE = OFF       // WDT operating mode (WDT Disabled, SWDTEN is ignored)
 
 const int STEP_REV = 2048;      // steps per revolution
-const int ADCRESH_REG = 0b01001100;    // setting the threshold sensor, currently ~600mV
+const int ADCRESH_REG = 0b00101110;    // setting the threshold sensor, currently ~368mV
 // for the ADC result register high
 
 int fade_on = 1; // indicate if LED fades on or off
