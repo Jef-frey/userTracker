@@ -16,7 +16,7 @@ IR transmitters and receivers will be used to detect the user's hand movement, a
 A pair of IR transmitter/receiver will be used to create a sensor to detect how close the user's hand is to the device.
 Two such sensors will be used to compare the distance of the sensors and the user's hand, and the device will be mounted on a motor to rotate in the direction corresponding to the user's proximity with the sensors. 
 
-https://github.com/user-attachments/assets/98550bba-aff8-4348-be6f-40275e6825a6
+https://github.com/user-attachments/assets/1b537696-194a-400e-b10d-6a0f2009ed03
 
 ## Configuration
 The circuit and PCB will need to be redesigned to add features or change to fit your own project, but if you wish to just try out the design, the PCB can be glued to the motor and it will function as intended.
